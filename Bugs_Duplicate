@@ -1,0 +1,81 @@
+CASE：
+(a) unsigned aCnt = 0, eCnt = 0, iouCnt = 0;
+    char ch = next_text();
+    switch (ch) 
+    {
+        case 'a': aCnt++; 缺少break
+        case 'e': eCnt++; 缺少break
+        default: iouCnt++; 缺少break
+    }
+
+
+(b) unsigned index = some_value();
+    switch (index) 
+    {
+        case 1:
+            int ix = get_value();
+            ivec[ ix ] = index;
+            break;
+        default:
+            ix = ivec.size()-1; 此处未定义ix
+            ivec[ ix ] = index;
+    }
+
+    
+(c) unsigned evenCnt = 0, oddCnt = 0;
+    int digit = get_num() % 10;
+    switch (digit) 
+    {
+        case 1, 3, 5, 7, 9: 太多case在同一行，应分开case
+            oddcnt++;
+            break;
+        case 2, 4, 6, 8, 10: 太多case在同一行，应分开case
+            evencnt++;
+            break;
+    }
+
+
+(d) unsigned ival=512, jval=1024, kval=4096; 必须为整型const
+    unsigned bufsize;
+    unsigned swt = get_bufCnt();
+    switch(swt) 
+    {
+        case ival:
+            bufsize = ival * sizeof(int);
+            break;
+        case jval:
+            bufsize = jval * sizeof(int);
+            break;
+        case kval:
+            bufsize = kval * sizeof(int);
+            break;
+    }
+
+
+
+FOR：
+(a) for (int ix = 0; ix != sz; ++ix) { /* ... */ } 把int定义放在循环体外
+    if (ix != sz)
+    	// . . .
+
+(b) int ix;
+    for (ix != sz; ++ix) { /* ... */ } 少一个初始条件
+
+(c) for (int ix = 0; ix != sz; ++ix, ++sz) { /*...*/ } 可能无法结束
+
+
+DO...WHILE:
+(a) do  // 应该添加花括号
+        int v1, v2;
+        cout << "Please enter two numbers to sum:" ;
+        if (cin >> v1 >> v2)
+            cout << "Sum is: " << v1 + v2 << endl;
+    while (cin);
+
+(b) do {
+        // . . .
+    } while (int ival = get_response()); // 应该将ival 定义在循环外
+
+(c) do {
+        int ival = get_response();
+    } while (ival); // 应该将ival 定义在循环外

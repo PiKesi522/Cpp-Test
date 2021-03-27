@@ -1,0 +1,15 @@
+(a) int f() 返回类型出错
+    {
+         string s;
+         // ...
+         return s;
+    }
+
+(b) f2(int i) 缺少返回类型，应写void
+    { /* ... */ } 
+
+(c) int calc(int v1, int v1) 缺少返回值，应写return ;
+    { /* ... */ }
+
+(d) double square (double x)  
+    return x * x;  函数体部分应写括号
