@@ -1,60 +1,40 @@
 #include <iostream>
 #include <string>
-#include <vector>
-#include <algorithm>
-#include <set>
-#include <map>
-#include <math.h>
-#include <cstring>
 
 using namespace std;
 
-int question()
-{
-    int n;
-    cin >> n;
-
-    int ind[105] = {0}, outd[105] = {0};
-    int vis[105][105] = {0};
-
-    int id, od;
-    for (int i = 0; i < n; ++i)
-    {
-        cin >> od >> id;
-        if(!vis[od][id])
-        {
-            outd[od]++;
-            ind[id]++;
-            vis[od][id] = 1;
-        }
-    }
-
-    bool flag = true;
-
-    for (int i = 0; i < 105; ++i)
-    {
-        if (outd[i] > 1 || (ind[i] && outd[i]))
-        {
-            flag = false;
-            break;
-        }
-    }
-
-    if(flag)
-        cout << "Lucky dxw!" << endl;
-    else
-        cout << "Poor dxw!" << endl;
-    
-    return 0;
-}
+//int DP[10000][10000] = {0};
 
 int main()
 {
-    int T;
-    cin >> T;
-
-    for (int i = 0; i < T;i++)
-        question();
-
+    int **DP = (int**)malloc(sizeof(int*) * 50125);  //sizeof(int*),不能少*，一个指针的内存大小，每个元素是一个指针。
+    for (int i = 0;i < 50125;i++)
+    {
+        DP[i] = (int*)malloc(sizeof(int) * 50125);
+    }
+    string s1,s2;
+    cin >> s1 >> s2;
+    int bg = 0/*,st = 0,ed = 0*/;
+    int sizeX = s1.size();
+    int sizeY = s2.size();
+    for(int i = 1; i <= sizeX; i++)
+    {
+        for(int j = 1; j <= sizeY; j++)
+        {
+            if(s1[i - 1] == s2[j - 1])
+            {
+                DP[i][j] = DP[i - 1][j - 1] + 1;
+                if(DP[i][j] > bg)
+                {
+                    bg = DP[i][j];
+                    //st = i - bg + 2;
+                    //ed = j - bg + 2;
+                }
+            }
+            else
+                DP[i][j] = 0;
+        }
+    }
+    cout << bg << endl;
     return 0;
 }
